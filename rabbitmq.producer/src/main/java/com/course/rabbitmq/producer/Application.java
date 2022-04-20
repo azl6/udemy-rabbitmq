@@ -7,12 +7,14 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import com.course.rabbitmq.producer.producer.HelloRabbitProducer;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
 @SpringBootApplication
+@EnableScheduling
 public class Application implements CommandLineRunner {
 
-	@Autowired
-	private HelloRabbitProducer producer;
+//	@Autowired
+//	private HelloRabbitProducer producer;
 
 	public static void main(String[] args) {
 		SpringApplication.run(Application.class, args);
@@ -20,6 +22,6 @@ public class Application implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		producer.sendHello("Alex" + Math.random());
+//		producer.sendHello("Alex" + Math.random());
 	}
 }
