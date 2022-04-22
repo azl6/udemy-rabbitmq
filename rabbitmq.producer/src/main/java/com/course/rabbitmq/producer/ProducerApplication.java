@@ -1,40 +1,46 @@
 package com.course.rabbitmq.producer;
 
 import com.course.rabbitmq.producer.entity.Employee;
+import com.course.rabbitmq.producer.entity.Picture;
 import com.course.rabbitmq.producer.producer.EmployeeJsonProducer;
 import com.course.rabbitmq.producer.producer.HumanResourceProducer;
+import com.course.rabbitmq.producer.producer.PictureProducer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import java.time.LocalDate;
+import java.util.List;
+import java.util.concurrent.ThreadLocalRandom;
 
 @SpringBootApplication
 //@EnableScheduling
 public class ProducerApplication implements CommandLineRunner {
 
-//	@Autowired
-//	private HelloRabbitProducer producer;
-
-//	@Autowired
-//	private EmployeeJsonProducer employeeJsonProducer;
-
 	@Autowired
-	private HumanResourceProducer humanResourceProducer;
+	private PictureProducer pictureProducer;
 
+	//valid sources
+	private final List<String> SOURCES = List.of("mobile", "web");
+
+
+	//valid types
+	private final List<String> TYPES = List.of("jpg", "png", "svg");
 	public static void main(String[] args) {
 		SpringApplication.run(ProducerApplication.class, args);
 	}
 
 	@Override
 	public void run(String... args) throws Exception {
-//		producer.sendHello("Alex" + Math.random());
-//		employeeJsonProducer.sendMessage(new Employee("1", "Alex", LocalDate.now()));
+		for(int i=0; i<10; i++){
+			var picture = new Picture();
+			picture.setName("Picture " + i);
+			picture.setSize(ThreadLocalRandom.current().nextLong(1, 10000));
+			picture.setSource(SOURCES.get(i % SOURCES.size()));
+			picture.setType(TYPES.get(i % TYPES.size()));
 
-		for(int i=1; i <= 5; i++){
-			var employee = new Employee("emp" + i, "Employee" + i, LocalDate.now());
-			humanResourceProducer.sendMessage(employee);
+			pictureProducer.sendMessage(picture);
 		}
 
 	}
