@@ -1,11 +1,9 @@
 package com.course.rabbitmq.producer;
 
 import com.course.rabbitmq.producer.entity.Employee;
+import com.course.rabbitmq.producer.entity.Furniture;
 import com.course.rabbitmq.producer.entity.Picture;
-import com.course.rabbitmq.producer.producer.EmployeeJsonProducer;
-import com.course.rabbitmq.producer.producer.HumanResourceProducer;
-import com.course.rabbitmq.producer.producer.PictureProducer;
-import com.course.rabbitmq.producer.producer.PictureProducerTwo;
+import com.course.rabbitmq.producer.producer.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -20,14 +18,13 @@ import java.util.concurrent.ThreadLocalRandom;
 public class ProducerApplication implements CommandLineRunner {
 
 	@Autowired
-	private PictureProducerTwo pictureProducer;
+	private FurnitureProducer furnitureProducer;
 
 	//valid sources
-	private final List<String> SOURCES = List.of("mobile", "web");
-
-
+	private final List<String> COLORS = List.of("white", "red", "green");
 	//valid types
-	private final List<String> TYPES = List.of("jpg", "png", "svg");
+	private final List<String> MATERIALS = List.of("wood", "plastic", "steel");
+
 	public static void main(String[] args) {
 		SpringApplication.run(ProducerApplication.class, args);
 	}
@@ -35,13 +32,12 @@ public class ProducerApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 		for(int i=0; i<10; i++){
-			var picture = new Picture();
-			picture.setName("Picture " + i);
-			picture.setSize(ThreadLocalRandom.current().nextLong(1, 10000));
-			picture.setSource(SOURCES.get(i % SOURCES.size()));
-			picture.setType(TYPES.get(i % TYPES.size()));
+			var furniture = new Furniture();
+			furniture.setName("Furniture " + i);
+			furniture.setColor(COLORS.get(i % COLORS.size()));
+			furniture.setMaterial(MATERIALS.get(i % MATERIALS.size()));
 
-			pictureProducer.sendMessage(picture);
+			furnitureProducer.sendMessage(furniture);
 		}
 
 	}
