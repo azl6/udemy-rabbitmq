@@ -2,6 +2,7 @@ package com.course.rabbitmq.producer;
 
 import com.course.rabbitmq.producer.entity.Employee;
 import com.course.rabbitmq.producer.producer.EmployeeJsonProducer;
+import com.course.rabbitmq.producer.producer.HumanResourceProducer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -16,8 +17,11 @@ public class ProducerApplication implements CommandLineRunner {
 //	@Autowired
 //	private HelloRabbitProducer producer;
 
+//	@Autowired
+//	private EmployeeJsonProducer employeeJsonProducer;
+
 	@Autowired
-	private EmployeeJsonProducer employeeJsonProducer;
+	private HumanResourceProducer humanResourceProducer;
 
 	public static void main(String[] args) {
 		SpringApplication.run(ProducerApplication.class, args);
@@ -26,6 +30,12 @@ public class ProducerApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 //		producer.sendHello("Alex" + Math.random());
-		employeeJsonProducer.sendMessage(new Employee("1", "Alex", LocalDate.now()));
+//		employeeJsonProducer.sendMessage(new Employee("1", "Alex", LocalDate.now()));
+
+		for(int i=1; i <= 5; i++){
+			var employee = new Employee("emp" + i, "Employee" + i, LocalDate.now());
+			humanResourceProducer.sendMessage(employee);
+		}
+
 	}
 }
