@@ -18,12 +18,12 @@ import java.util.concurrent.ThreadLocalRandom;
 public class ProducerApplication implements CommandLineRunner {
 
 	@Autowired
-	private FurnitureProducer furnitureProducer;
+	private MyPictureProducer myPictureProducer;
 
 	//valid sources
-	private final List<String> COLORS = List.of("white", "red", "green");
+	private final List<String> SOURCES = List.of("web", "mobile");
 	//valid types
-	private final List<String> MATERIALS = List.of("wood", "plastic", "steel");
+	private final List<String> TYPES = List.of("jpg", "png", "svg");
 
 	public static void main(String[] args) {
 		SpringApplication.run(ProducerApplication.class, args);
@@ -31,13 +31,14 @@ public class ProducerApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		for(int i=0; i<10; i++){
-			var furniture = new Furniture();
-			furniture.setName("Furniture " + i);
-			furniture.setColor(COLORS.get(i % COLORS.size()));
-			furniture.setMaterial(MATERIALS.get(i % MATERIALS.size()));
+		for(int i=0; i<1; i++){
+			var picture = new Picture();
+			picture.setName("Picture " + i);
+			picture.setSize(ThreadLocalRandom.current().nextLong(9000, 10000));
+			picture.setType(TYPES.get(i % TYPES.size()));
+			picture.setSource(SOURCES.get(i % SOURCES.size()));
 
-			furnitureProducer.sendMessage(furniture);
+			myPictureProducer.sendMessage(picture);
 		}
 
 	}
