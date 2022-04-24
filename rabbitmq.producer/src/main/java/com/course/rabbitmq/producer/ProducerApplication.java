@@ -22,7 +22,7 @@ public class ProducerApplication implements CommandLineRunner {
 	public List<String> TYPES = List.of("png", "svg", "jpg");
 
 	@Autowired
-	private SpringPictureProducer springPictureProducer;
+	private SpringEmployeeProducer springEmployeeProducer;
 
 	public static void main(String[] args) {
 		SpringApplication.run(ProducerApplication.class, args);
@@ -31,12 +31,9 @@ public class ProducerApplication implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 
 		for (int i=0; i<1; i++){
-			var picture = new Picture();
-			picture.setName("Picture " + i);
-			picture.setSize(ThreadLocalRandom.current().nextLong(9001, 10000));
-			picture.setSource(SOURCES.get(i % SOURCES.size()));
-			picture.setType(TYPES.get(i % TYPES.size()));
-			springPictureProducer.sendMessage(picture);
+			var employee = new Employee("emp" + i, "", LocalDate.of(1990, 12, i+1));
+			springEmployeeProducer.sendMessage(employee);
+
 		}
 	}
 }
