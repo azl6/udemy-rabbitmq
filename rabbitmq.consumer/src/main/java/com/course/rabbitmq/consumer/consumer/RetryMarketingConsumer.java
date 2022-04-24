@@ -15,7 +15,7 @@ import com.course.rabbitmq.consumer.entity.Employee;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.rabbitmq.client.Channel;
 
-@Service
+//@Service
 public class RetryMarketingConsumer {
 
     private static final Logger LOG = LoggerFactory.getLogger(RetryMarketingConsumer.class);

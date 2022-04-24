@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.nio.charset.StandardCharsets;
 
-@Service
+//@Service
 public class FurnitureProducer {
 
     @Autowired

@@ -1,7 +1,6 @@
 spring:
   rabbitmq:
-    adresses: #cloudhost
-    username: #clouduser
-    password: #cloudpassword
-    virtual-host: #cloudvhost
+    adresses: localhost:5672
+    username: guest
+    password: guest
 
