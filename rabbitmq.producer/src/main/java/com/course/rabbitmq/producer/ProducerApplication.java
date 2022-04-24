@@ -18,19 +18,12 @@ import java.util.concurrent.ThreadLocalRandom;
 @EnableScheduling
 public class ProducerApplication implements CommandLineRunner {
 
-	@Autowired
-	private RetryEmployeeProducer employeeProducer;
-
-
 	public static void main(String[] args) {
 		SpringApplication.run(ProducerApplication.class, args);
 	}
 
 	@Override
 	public void run(String... args) throws Exception {
-		for(int i=0; i<10; i++){
-			var employee = new Employee("emp"+i, null, LocalDate.now());
-			employeeProducer.sendMessage(employee);
-		}
+
 	}
 }

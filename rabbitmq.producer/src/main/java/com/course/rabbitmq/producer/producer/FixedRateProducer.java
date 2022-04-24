@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
-//@Service
+@Service
 public class FixedRateProducer {
 
     @Autowired
@@ -17,7 +17,7 @@ public class FixedRateProducer {
 
     private static final Logger LOG = LoggerFactory.getLogger(FixedRateProducer.class);
 
-    @Scheduled(fixedRate = 500)
+    @Scheduled(fixedRate = 2000)
     public void sendMessage(){
         i++;
         //LOG.info("i is " + i);

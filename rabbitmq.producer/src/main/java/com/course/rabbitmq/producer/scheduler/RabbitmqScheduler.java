@@ -17,7 +17,7 @@ public class RabbitmqScheduler {
     private static final Logger LOG = LoggerFactory.getLogger(RabbitmqScheduler.class);
 
 
-    @Scheduled(fixedDelay = 90000)
+    //@Scheduled(fixedDelay = 90000)
     private void sweepDirtyQueues(){
         try {
             var dirtyQueues = rabbitmqClient.getAllQueues()
